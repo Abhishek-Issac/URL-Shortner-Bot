@@ -57,24 +57,26 @@ async def inline_short(bot, update):
         results=answers
     )
 
-
 async def short(chat_id, link):
     shorten_urls = "**--Shortened URLs--**\n"
-    
+
+    # Assuming ANLINKS_API is defined somewhere in your code
     if ANLINKS_API and await db.allow_domain(chat_id, "anlinks.in"):
         try:
-    response = requests.get(api_url)
-    response_data = response.json()
+            # Replace 'your_api_url_here' with the actual API URL
+            api_url = 'your_api_url_here'
+            response = requests.get(api_url)
+            response_data = response.json()
 
-    if response_data["status"] == "success":
-        shortened_url = response_data["shortenedUrl"]
-        shorten_urls += f"\n**Anlinks.in :-** {shortened_url}"
-    else:
-        print(f"Anlinks API error: {response_data.get('error', 'Unknown error')}")
+            if response_data["status"] == "success":
+                shortened_url = response_data["shortenedUrl"]
+                shorten_urls += f"\n**Anlinks.in :-** {shortened_url}"
+            else:
+                print(f"Anlinks API error: {response_data.get('error', 'Unknown error')}")
 
-except Exception as error:
-    print(f"Anlinks API request error: {error}")
-    
+        except Exception as error:
+            print(f"Anlinks API request error: {error}")
+
     shorten_urls += "\n\nMade by @Goodnation"
     
     return shorten_urls
