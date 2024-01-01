@@ -19,7 +19,9 @@ Bot = Client(
     api_hash=api_hash,
     plugins=plugins,
     workers=50,
-    sleep_threshold=10
+    sleep_threshold=10,
+    me = await self.get_me()
 )
+logger.info("The bot has Started On {me.username}")
 
 Bot.run()
