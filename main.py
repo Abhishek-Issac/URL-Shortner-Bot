@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-bot_token = "6784231545:AAFqabbwfT8Vb34-pgs6RZZ5V-jgJJMRI28"
+bot_token = "6735390787:AAFgC8A7BloHiOSAJWcj8uyQJi-f_BRdlhU"
 api_id = "1522127"
 api_hash = "1252ffe16baf341bfd7236f92df76b0e"
 plugins = dict(
