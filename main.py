@@ -20,8 +20,7 @@ Bot = Client(
     plugins=plugins,
     workers=50,
     sleep_threshold=10,
-    me = self.get_me()
 )
-logger.info("The bot has Started On {me.username}")
+logger.info("The bot has Started Succesfully")
 
 Bot.run()
