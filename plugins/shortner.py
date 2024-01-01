@@ -12,7 +12,7 @@ SHORTCM_API = os.environ.get("SHORTCM_API", None)
 GPLINKS_API = os.environ.get("GPLINKS_API", None)
 POST_API = os.environ.get("POST_API", None)
 OWLY_API = os.environ.get("OWLY_API", None)
-ALINKS_API = "5fe07b509a67719f0cda219f9f4cc46b1e45c0cc"
+ANLINKS_API = "5fe07b509a67719f0cda219f9f4cc46b1e45c0cc"
 
 BUTTONS = InlineKeyboardMarkup(
     [[InlineKeyboardButton(text='⚙ Support ⚙', url='https://telegram.me/goodnation')]]
