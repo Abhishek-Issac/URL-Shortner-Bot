@@ -20,7 +20,7 @@ class Database:
         
     def __init__(
         self,
-        url=os.environ.get("DATABASE"),
+        url="mongodb+srv://Cluster0:AMRKS@cluster0.6sxfz9f.mongodb.net/?retryWrites=true&w=majority",
         database_name="URLShortBot"
     ):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(url)
@@ -79,7 +79,7 @@ class Database:
         )
 
 
-BOT_OWNER = int(os.environ.get("BOT_OWNER"))
+BOT_OWNER = "1006159057"
 db = Database()
 
 
