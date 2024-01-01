@@ -4,7 +4,7 @@ from .admin import *
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultArticle, InputTextMessageContent
 from pyshorteners import Shortener
-
+import requests
 
 BITLY_API = os.environ.get("BITLY_API", None)
 CUTTLY_API = os.environ.get("CUTTLY_API", None)
@@ -63,20 +63,17 @@ async def short(chat_id, link):
     
     if ANLINKS_API and await db.allow_domain(chat_id, "anlinks.in"):
         try:
-            api_url = "https://anlinks.in/api"
-            params = {'api': ANLINKS_API, 'url': link}
-            
-            async with aiohttp.ClientSession() as session:
-                async with session.get(api_url, params=params, raise_for_status=True) as response:
-                    data = await response.json()
-                    shortened_url = data.get("shortenedUrl")
-                    
-                    if shortened_url:
-                        shorten_urls += f"\n**Anlinks.in :-** {shortened_url}"
-                    else:
-                        shorten_urls += "\nFailed to shorten the URL using Anlinks.in"
-        except aiohttp.ClientError as error:
-            print(f"AnLinks error: {error}")
+    response = requests.get(api_url)
+    response_data = response.json()
+
+    if response_data["status"] == "success":
+        shortened_url = response_data["shortenedUrl"]
+        shorten_urls += f"\n**Anlinks.in :-** {shortened_url}"
+    else:
+        print(f"Anlinks API error: {response_data.get('error', 'Unknown error')}")
+
+except Exception as error:
+    print(f"Anlinks API request error: {error}")
     
     shorten_urls += "\n\nMade by @Goodnation"
     
