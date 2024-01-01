@@ -59,22 +59,25 @@ async def inline_short(bot, update):
 
 
 async def short(chat_id, link):
-    shorten_urls = "**--Shorted URLs--**\n"
+    shorten_urls = "**--Shortened URLs--**\n"
+    
     if ANLINKS_API and await db.allow_domain(chat_id, "anlinks.in"):
         try:
             api_url = "https://anlinks.in/api"
             params = {'api': ANLINKS_API, 'url': link}
+            
             async with aiohttp.ClientSession() as session:
                 async with session.get(api_url, params=params, raise_for_status=True) as response:
                     data = await response.json()
-                    url = data["shortenedUrl"]
-                    shorten_urls += f"\n**Anlinks.in :-** {url}"
-        except Exception as error:
-            print(f"AnLinks error :- {error}")
+                    shortened_url = data.get("shortenedUrl")
+                    
+                    if shortened_url:
+                        shorten_urls += f"\n**Anlinks.in :-** {shortened_url}"
+                    else:
+                        shorten_urls += "\nFailed to shorten the URL using Anlinks.in"
+        except aiohttp.ClientError as error:
+            print(f"AnLinks error: {error}")
     
-    # Send the text
-    try:
-        shorten_urls += "\n\nMade by @Goodnation"
-        return shorten_urls
-    except Exception as error:
-        return error
+    shorten_urls += "\n\nMade by @Goodnation"
+    
+    return shorten_urls
