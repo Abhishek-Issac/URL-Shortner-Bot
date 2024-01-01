@@ -1,7 +1,6 @@
 import os
 from pyrogram import Client
 from dotenv import load_dotenv
-import logging
 
 load_dotenv()
 
@@ -21,6 +20,5 @@ Bot = Client(
     workers=50,
     sleep_threshold=10,
 )
-logger.info("The bot has Started Succesfully")
 
 Bot.run()
