@@ -32,7 +32,7 @@ class Database:
         return {
             "id": id,
             "domains": {
-                "anlinks.in: True,
+                "anlinks.in": True
             }
         }
         
